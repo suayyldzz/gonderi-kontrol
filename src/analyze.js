@@ -95,7 +95,7 @@ export function slugify(value) {
     .toLocaleLowerCase('tr')
     .replace(/[çğıöşü]/g, (c) => TR_ASCII[c])
     .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
+    .replace(/\p{Diacritic}/gu, '')
     .replace(/\s+/g, '_')
     .replace(/[^a-z0-9_.-]/g, '');
 }
