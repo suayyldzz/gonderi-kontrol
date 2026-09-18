@@ -87,6 +87,19 @@ export function analyze(text) {
   };
 }
 
+// UTM değerleri analitik raporlarında düzgün görünsün diye ASCII slug'a çevrilir.
+const TR_ASCII = { ç: 'c', ğ: 'g', ı: 'i', ö: 'o', ş: 's', ü: 'u' };
+export function slugify(value) {
+  return value
+    .trim()
+    .toLocaleLowerCase('tr')
+    .replace(/[çğıöşü]/g, (c) => TR_ASCII[c])
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_.-]/g, '');
+}
+
 // Kampanya trafiğini analitikte ayırt etmek için UTM parametreli link üretir.
 export function buildUtmUrl(base, { source, medium, campaign, content, term } = {}) {
   let url;
@@ -97,8 +110,8 @@ export function buildUtmUrl(base, { source, medium, campaign, content, term } = 
   }
   const params = { utm_source: source, utm_medium: medium, utm_campaign: campaign, utm_content: content, utm_term: term };
   for (const [key, value] of Object.entries(params)) {
-    const v = value?.trim();
-    if (v) url.searchParams.set(key, v.toLowerCase().replace(/\s+/g, '_'));
+    const v = value ? slugify(value) : '';
+    if (v) url.searchParams.set(key, v);
   }
   return url.toString();
 }

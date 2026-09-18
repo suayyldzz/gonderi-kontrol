@@ -8,6 +8,7 @@ import {
   analyzePlatform,
   analyze,
   buildUtmUrl,
+  slugify,
 } from '../src/analyze.js';
 
 test('emoji ve Türkçe karakterleri tek karakter sayar', () => {
@@ -66,10 +67,17 @@ test('UTM linki üretir, boş alanları atlar, boşlukları normalize eder', () 
   const u = new URL(url);
   assert.equal(u.searchParams.get('id'), '5');
   assert.equal(u.searchParams.get('utm_source'), 'instagram');
-  assert.equal(u.searchParams.get('utm_campaign'), 'yaz_kampanyası');
+  assert.equal(u.searchParams.get('utm_campaign'), 'yaz_kampanyasi');
   assert.equal(u.searchParams.has('utm_content'), false);
 });
 
 test('geçersiz URL için anlaşılır hata verir', () => {
   assert.throws(() => buildUtmUrl('site.com', {}), /Geçerli bir URL/);
+});
+
+test('UTM değerlerini Türkçe karaktersiz slug yapar', () => {
+  assert.equal(slugify('Yaz İndirimi'), 'yaz_indirimi');
+  assert.equal(slugify('  Çağrı ŞÜKRÜ Öğün '), 'cagri_sukru_ogun');
+  assert.equal(slugify('Instagram'), 'instagram');
+  assert.equal(slugify('50% İndirim!'), '50_indirim');
 });
