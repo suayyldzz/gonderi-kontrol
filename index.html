@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gönderi Kontrol · Sosyal medya metin aracı</title>
+  <meta name="description" content="Sosyal medya gönderini X, Threads, Instagram ve LinkedIn kurallarına göre kontrol et, UTM linki üret.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Gönderi Kontrol</h1>
+    <p>Metnini yaz, her platformda nasıl duracağını paylaşmadan önce gör.</p>
+  </header>
+
+  <main>
+    <section class="editor">
+      <label for="text">Gönderi metni</label>
+      <textarea id="text" rows="9" placeholder="Yeni sezon menümüz yayında! ☕ Detaylar: https://ornek.com/menu #kahve #istanbul @beykent"></textarea>
+      <div class="stats" id="stats" aria-live="polite"></div>
+      <div class="chips" id="tags"></div>
+    </section>
+
+    <section class="platforms" id="platforms" aria-label="Platform kontrolleri"></section>
+
+    <section class="utm">
+      <h2>UTM link oluşturucu</h2>
+      <p class="hint">Gönderideki linke kampanya etiketi ekle; Google Analytics'te hangi paylaşımın trafik getirdiğini gör.</p>
+      <form id="utm-form">
+        <label>Hedef URL<input name="base" type="url" placeholder="https://ornek.com/urun" required></label>
+        <div class="row">
+          <label>Kaynak<input name="source" placeholder="instagram"></label>
+          <label>Ortam<input name="medium" placeholder="social"></label>
+          <label>Kampanya<input name="campaign" placeholder="yaz_indirimi"></label>
+        </div>
+        <label>İçerik (isteğe bağlı)<input name="content" placeholder="hikaye_1"></label>
+      </form>
+      <div class="utm-out">
+        <output id="utm-result">Hedef URL girince link burada oluşur.</output>
+        <button type="button" id="copy" disabled>Kopyala</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Su Ayyıldız · <a href="https://github.com/suayyldzz/gonderi-kontrol">Kaynak kod</a>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

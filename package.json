@@ -1,0 +1,11 @@
+{
+  "name": "gonderi-kontrol",
+  "version": "1.0.0",
+  "description": "Sosyal medya gönderilerini platform kurallarına göre kontrol eden ve UTM linki üreten web aracı",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "Su Ayyıldız",
+  "license": "MIT"
+}
